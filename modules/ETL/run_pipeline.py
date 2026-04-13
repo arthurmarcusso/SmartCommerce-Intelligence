@@ -57,6 +57,7 @@ def transformar(dfs):
         )
         .reset_index()
     )
+    metricas["ticket_medio"] = (metricas["receita_total"] / metricas["total_pedidos"]).round(2)
     metricas.rename(columns={"data_pedido": "data"}, inplace = True)
 
     logger.success("Transformação concluída!")

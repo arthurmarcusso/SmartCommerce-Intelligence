@@ -2,9 +2,9 @@ import os
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 from loguru import logger
-
+import sys
+from pathlib import Path
 load_dotenv()
-
 
 def get_engine():
     host = os.getenv("DB_HOST","localhost")
