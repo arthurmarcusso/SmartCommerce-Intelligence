@@ -12,7 +12,6 @@ from sklearn.preprocessing import StandardScaler
 sys.path.append(str(Path(__file__).resolve().parents[1] / "ETL"))
 from db import get_engine
 
-
 MODELS_DIR = Path(__file__).parent / "models"
 MODELS_DIR.mkdir(exist_ok=True)
 

@@ -7,11 +7,25 @@ from pathlib import Path
 load_dotenv()
 
 def get_engine():
-    host = os.getenv("DB_HOST","localhost")
-    port = os.getenv("DB_PORT", "3306")
-    name = os.getenv("DB_NAME", "smartcomerce")
-    user = os.getenv("DB_USER", "root")
-    password = os.getenv("DB_PASSWORD", "")
+    #tentando pegar as credenciais do Streamlit secrets, se não funcionar, pega do .env
+    try:
+        import streamlit as st
+        creds = st.secrets["mysql"]
+        host     = creds["host"]
+        port     = creds["port"]
+        name     = creds["database"]
+        user     = creds["user"]
+        password = creds["password"]
+        logger.info("Usando credenciais do Streamlit secrets.")
+
+    except Exception:
+        host     = os.getenv("DB_HOST", "localhost")
+        port     = os.getenv("DB_PORT", "3306")
+        name     = os.getenv("DB_NAME", "smartcommerce")
+        user     = os.getenv("DB_USER", "root")
+        password = os.getenv("DB_PASSWORD", "")
+        logger.info(f"Usando credenciais do .env: {host}:{port}/{name}")
+
 
     url = f"mysql+pymysql://{user}:{password}@{host}:{port}/{name}?charset=utf8mb4"
     engine = create_engine(url, echo=False)

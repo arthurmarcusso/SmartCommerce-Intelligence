@@ -1,0 +1,7 @@
+{
+  "extraPaths": [
+    "modules/ETL",
+    "modules/ML",
+    "modules/dashboard"
+  ]
+}
